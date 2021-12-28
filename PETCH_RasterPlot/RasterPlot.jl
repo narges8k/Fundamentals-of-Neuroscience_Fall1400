@@ -2,8 +2,6 @@ using MAT, LaTeXStrings, Plots, ProgressBars, Statistics, StatsBase, StatsPlots,
 cd(dirname(@__FILE__))
 file = matopen("Q2_data.mat")
 vars = matread("Q2_data.mat")
-vars
-vars["trials"]
 ####All
 spike_list=[[] for i in 1:100]
 for i in 1:100

@@ -39,3 +39,4 @@ for i in spi_tri_list
 end
 spi_tri_avg
 plot(range(;length = 598, start = 1, stop = 90),spi_tri_avg)
+close(file)

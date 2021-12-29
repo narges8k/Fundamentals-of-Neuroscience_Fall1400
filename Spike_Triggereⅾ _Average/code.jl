@@ -21,17 +21,53 @@ for i in rand_spike
 end
 plot(plots...,size = (1000,1000),xlabel=L"Time(s)", ylabel=L"Voltage(mV)", legend=false)
 savefig("../../Fundamentals-of-Neuroscience_Fall1400/Spike_Triggereⅾ _Average/Figs/20random_75msecBefore_plot.pdf")
-#######c
-spi_tri_list=[]
+
+#######C
+all_in1=[]
 for i in vars["Spike_times"]
-    push!(spi_tri_list, vars["Stim"][floor(Int, (i-0.075)*2000):floor(Int, i*2000)])
+    push!(all_in1,vars["Stim"][ceil(Int, (i-0.075)*2000):floor(Int, i*2000)])
 end
-spi_tri_avg=[]
-for i in spi_tri_list
-    push!(spi_tri_avg, mean(i))
+avglist1=[]
+for i in 1:150
+    each=[]
+    for j in 1:598
+        push!(each, all_in1[j][i])
+    end
+    push!(avglist1, mean(each))
 end
-spi_tri_avg
-plot(spi_tri_avg)
+avglist2=[]
+for i in 1:100
+    each=[]
+    for j in 1:598
+        push!(each, all_in2[j][i])
+    end
+    push!(avglist2, mean(each))
+end
+avglist2
+SpikeTime=length(avglist1)
+plot(collect(range(-0.075,0.0, length=150)),avglist1, label="STA Plot", title=L"Spike\ Triggered\ Average\ For\ All\ Data", color=:blue, dpi=400)
+plot!(collect(range(0.0, 0.05, length=100)),avglist2, label=nothing, ylabel=L"Voltage(mV)", xlabel=L"Time(s)", color=:blue)
+plot!([0.0, 0.0], [minimum(avglist), maximum(avglist)], label="Spike Time", color=:red)
+savefig("../../Fundamentals-of-Neuroscience_Fall1400/Spike_Triggereⅾ _Average/Figs/STA_All.pdf")
+
 #######D
 
+stim20=[]
+for i in rand_spike
+    push!(stim20,vars["Stim"][floor(Int, (i-0.075)*2000):floor(Int, i*2000)])
+end
+avglist20=[]
+for i in 1:150
+    each=[]
+    for j in 1:20
+        push!(each, stim20[j][i])
+    end
+    push!(avglist20, mean(each))
+end
+plot()
+for i in rand_spike
+    plot!(collect(range(-0.075, 0.0, length=150)),vars["Stim"][floor(Int, (i-0.075)*2000):floor(Int, i*2000)][1:150], label=nothing, color=:cornflowerblue)
+end
+plot!(collect(range(-0.075, 0.0, length=150)),avglist20, color=:red, linewidth=5, label="STA", title=L"", xlabel=L"Voltage(mV)", ylabel=L"Time\ Before\ Spike(s)")
+savefig("../../Fundamentals-of-Neuroscience_Fall1400/Spike_Triggereⅾ _Average/Figs/stim20_75ms.pdf")
 close(file)

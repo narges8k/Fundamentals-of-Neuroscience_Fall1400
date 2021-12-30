@@ -19,8 +19,8 @@ for rate in 1:25
     num+=1
 end
 avg_firing_rate
-plot([0,0], [0.15, 0.5], color=:red, label=L"t=0")
-plot!([1:250],avg_firing_rate, xlabel=L"Time(ms)", ylabel=L"rate(Hz)", title=L"PETH\ for\ \Delta t=10ms", label=nothing, dpi=400, color=:turquoise3)
+plot([0,0], [0.15, 0.5], color=:red, label="Spike Time")
+plot!(collect(range(-0.050, 0.200, length=250)),avg_firing_rate, xlabel=L"Time(ms)", ylabel=L"rate(Hz)", title=L"PETH\ for\ \Delta t=10ms", label=nothing, dpi=400, color=:turquoise3)
 savefig("../../Fundamentals-of-Neuroscience_Fall1400/PETCH_RasterPlot/Figs/PETH_10ms.pdf")
 ####Δt=2.5 / L=5
 Δt_5L_list=[[] for i in 1:100]
@@ -39,8 +39,8 @@ for rate in 1:100
     num+=1
 end
 avg_firing_rate2
-plot([0,0], [0.15, 0.5], color=:red, label=L"t=0")
-plot!([1:0.5:250],avg_firing_rate2[1:499], xlabel=L"Time(ms)", ylabel=L"rate(Hz)", title=L"PETH\ for\ \Delta t=2.5ms", label=nothing, dpi=400, color=:mediumorchid4)
+plot([0,0], [0.15, 0.5], color=:red, label="Spike Time")
+plot!(collect(range(-0.050, 0.200, length=500)),avg_firing_rate2, xlabel=L"Time(ms)", ylabel=L"rate(Hz)", title=L"PETH\ for\ \Delta t=2.5ms", label=nothing, dpi=400, color=:mediumorchid4)
 savefig("../../Fundamentals-of-Neuroscience_Fall1400/PETCH_RasterPlot/Figs/PETH_5L.pdf")
 ####Δt=17.5 / L=35
 Δt_35L_list=[[] for i in 1:100]
@@ -59,8 +59,7 @@ for rate in 1:14
     num+=1
 end
 avg_firing_rate
-x=[i for i in 1.0:0.5:245]
-plot([0,0], [0.15, 0.5], color=:red, label=L"t=0")
-plot!(x ,avg_firing_rate[1:489], xlabel=L"Time(ms)", ylabel=L"rate(Hz)", title=L"PETH\ for\ \Delta t=17.5ms", label=nothing, dpi=400, color=:turquoise3)
+plot([0,0], [0.15, 0.5], color=:red, label=L"Spike Time")
+plot!(collect(range(-0.050, 0.200, length=490)) ,avg_firing_rate, xlabel=L"Time(ms)", ylabel=L"rate(Hz)", title=L"PETH\ for\ \Delta t=17.5ms", label=nothing, dpi=400, color=:turquoise3)
 savefig("../../Fundamentals-of-Neuroscience_Fall1400/PETCH_RasterPlot/Figs/PETH_17.5ms.pdf")
 close(file)
